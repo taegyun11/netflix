@@ -21,7 +21,7 @@ import Navigation from './component/Navigation';
 //10. 영화 검색을 할수있다.
 //11. 영화 정렬 가능
 //12. 영화를 필터링 할수도 있다.
-//13. 
+
 
 
 

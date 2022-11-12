@@ -24,6 +24,7 @@ const Home = () => {
       />
     );
   }
+  
   return (
     <div>
       <Banner movie={popularMovies.results[0]} />
