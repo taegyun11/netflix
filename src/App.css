@@ -50,9 +50,81 @@ body{
 }
 .movie-detail-page{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   margin-top: 4em;
 }
 .detail-page-picture{
-  width: 450px;
+  width: 600px;
+}
+.movie-detail-description{
+  display: flex;
+  width: 800px;
+  flex-direction: column;
+}
+.movie-detail-overview{
+  display: flex;
+  flex-direction: column;
+}
+.movie-picture{
+  padding-right: 3em;
+}
+.hr_description{
+  border-top: 4px double #8c8b8b;
+
+}
+.Badge-style{
+  font-size: x-large;
+  margin-right: 1em;
+  margin-bottom: 2em;
+}
+
+.budget-badge{
+  font-size: large;
+  width: wrap;
+  margin-bottom: 1em;
+  margin-right: 0.3em;
+}
+.movieDetail_title{
+  font-size: 6em;
+}
+.moviedetail-overview{
+  font-size: 1em;
+}
+.movieReview{
+  border: 1px solid;
+  margin: 3em 14em 3em 14em;
+  padding: 2em 2em 2em 2em;
+  
+}
+
+.review-author{
+  text-decoration: underline;
+}
+.review-button{
+  font-size: xx-large;
+}
+.related_pic_size{
+  width: 25em;
+}
+.related-movie{
+  margin-left: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.modal-content{
+  width: auto;
+}
+.movies-poster{
+  height: 450px;
+  display: flex;
+  align-items: center;
+}
+.movies-poster ::before{
+  position: absolute;
+  left:0;
+  width: 100%;
+  height: 400px;
+  content: '';
+  background: linear-gradient(to right, black, transparent);
 }
