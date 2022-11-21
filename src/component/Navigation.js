@@ -4,9 +4,7 @@ import {
   Container,
   Form,
   Button,
-  Nav,
-  NavDropdown,
-  FormControl,
+  Nav
 } from "react-bootstrap";
 
 import { Link } from "react-router-dom";

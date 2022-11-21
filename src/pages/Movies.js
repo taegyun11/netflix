@@ -27,10 +27,12 @@ const Movies = () => {
 
   return (
     <Container>
-      <div>sorting filtering</div>
       <Row>
+          <div>
+            sorting filtering
+          </div>
           {popularMovies.results.map((item) => (
-            <Col md={3}><PopularMovies item={item} /></Col>
+            <Col md={4}><PopularMovies item={item} /></Col>
           ))}
 
       </Row>
