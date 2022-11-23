@@ -1,8 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Badge } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  } from '@fortawesome/free-solid-svg-icons'
 
 const PopularMovies = ({ item }) => {
   const { movieGenre } = useSelector((state) => state.movie);
@@ -20,31 +18,46 @@ const PopularMovies = ({ item }) => {
       >
         <div className="gradient">
           <div className="movies-info">
-            <img
-              className="movies-picture"
-              width={50}
-              src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${item.poster_path}`}
-            />
-            <span className="movies-title">
-              {item.title}
-            </span>
-            <br/>
-            Release Date : {item.release_date}
-            <div>
-
+            <div className="movies-summary">
+              <img
+                className="movies-picture"
+                width={50}
+                src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${item.poster_path}`}
+              />
+              <div className="movies-summary-title">
+                <div className="movies-title">
+                  {item.title}
+                  <br />
+                  <div className="movie-release">{item.release_date}</div>
+                </div>
+              </div>
+            </div>
+            <div className="mt-2">
               {item.genre_ids.map((id) => (
                 <Badge bg="danger" className="badge-style">
                   {movieGenre.find((item) => item.id == id).name}
                 </Badge>
               ))}
             </div>
-            <div>
-              <div className="m-1 overflow">{item.overview}</div>
-            </div>
-            <div>
-              <span> {item.vote_average}</span>
-              <span>IMDB {item.vote_count}</span>
-              {item.adult ? "Over 18" : "under 18"}
+            <div className="m-1 overflow">{item.overview}</div>
+            <div className="sub-info">
+              <div>
+                <img
+                  width={25}
+                  src="https://ia.media-imdb.com/images/M/MV5BODc4MTA3NjkzNl5BMl5BcG5nXkFtZTgwMDg0MzQ2OTE@._V1_.png"
+                />{" "}
+                {item.vote_average}
+              </div>
+              <div>
+                <img
+                  width={25}
+                  src="https://toppng.com/uploads/preview/business-group-comments-people-group-business-icon-11562873610sqakpnccus.png"
+                />{" "}
+                {item.vote_count}
+              </div>
+              <div className="under-18">
+                {item.adult ? "Over 18" : "under 18"}
+              </div>
             </div>
           </div>
         </div>

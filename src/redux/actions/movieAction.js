@@ -78,7 +78,34 @@ function getMovies() {
     }
   };
 }
+function getSearchMovie(search) {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "GET_SEARCH_REQUEST" });
+      //axios 사용하여 API Call 사용
+      const searchMovieApi = api.get(
+        `/search/movie?api_key=${API_KEY}&language=en-US&query=${search}&page=1&include_adult=false`
+      );
+
+      //if multiple api is required at the same time.
+      let [ searchMovie] =
+        await Promise.all([
+          searchMovieApi,
+        ]);
+
+      dispatch({
+        type: "GET_SEARCH_SUCCESS",
+        payload: {
+          searchMovie: searchMovie.data,
+        },
+      });
+    } catch (error) {
+      dispatch({ type: "GET_MOVIES_FAILURE" });
+    }
+  };
+}
 export const movieAction = {
   getMovies,
   getMovieDetail,
+  getSearchMovie,
 };

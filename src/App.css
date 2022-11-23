@@ -134,15 +134,17 @@ body{
   text-align: left;
 }
 .movies-info{
-  position: absolute;
+  position: relative;
   padding: 1em;
 }
 .movies-title{
   padding-left: 1em;
-  font-size: 1.5em;
+  font-size: 1.3em;
+
+
 }
 .badge-style{
-  padding: 1em;
+  padding: 0.4em;
   margin: 0.3em;
 }
 .movies{
@@ -151,8 +153,37 @@ body{
   margin: 1em;
 }
 .overflow{
-  width: 280px;
+  width: 150px;
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap;
+  font-size: 0.555em;
+
+
+}
+.movies-summary{
+  display: flex;
+  justify-content: flex-start;
+  font-family: 'Anton', sans-serif;
+}
+.movies-summary-title{
+  flex-direction: column;
+
+}
+.under-18{
+  font-family: 'Rubik Distressed', cursive;
+  color: red;
+}
+.sub-info{
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+}
+.badge-style1{
+  margin: 0.3em;
+}
+.margin-left{
+  margin-left: 0.5em;
+}
+.movie-release{
+  color: lightblue;
 }
