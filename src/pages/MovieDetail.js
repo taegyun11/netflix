@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { movieAction } from "../redux/actions/movieAction";
 import ClipLoader from "react-spinners/ClipLoader";
 import { Badge, Col, Container, Row, Modal, Button } from "react-bootstrap";
@@ -52,7 +52,7 @@ const MovieDetail = () => {
         <div className="movie-picture">
           <img
             className="detail-page-picture"
-            src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movieDetail.poster_path}`}
+            src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movieDetail?.poster_path}`}
           />
         </div>
         <div className="movie-detail-description">
@@ -100,12 +100,7 @@ const MovieDetail = () => {
                 Show Trailer <FontAwesomeIcon icon={faPlay} />
               </Button>
               {/* Modal for Trailer */}
-              <Modal
-                show={show}
-                onHide={handleClose}
-                size="lg"
-                centered
-              >
+              <Modal show={show} onHide={handleClose} size="lg" centered>
                 <Modal.Body className="movie-trailer-body">
                   <YouTube videoId={movieTrailer.results[0].key} opts={opts} />
                 </Modal.Body>

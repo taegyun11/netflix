@@ -1,14 +1,26 @@
-import React from "react";
-import {
-  Navbar,
-  Container,
-  Form,
-  Button,
-  Nav
-} from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Navbar, Container, Form, Button, Nav } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
+import { movieAction } from "../redux/actions/movieAction";
+
 const Navigation = () => {
+  const { searchMovie } = useSelector((state) => state.movie);
+  const dispatch = useDispatch();
+  const [search, setSearch] = useState("");
+
+  const getSearch = (event) => {
+    setSearch(event.target.value);
+  };
+  const searchClick = () => {
+    if (search != {}) {
+      dispatch(movieAction.getSearchMovie(search));
+    } else {
+      dispatch(movieAction.getMovies());
+    }
+  };
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container fluid>
@@ -25,8 +37,12 @@ const Navigation = () => {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Link to="/" className="nav-item">Home</Link>
-            <Link to="/movies" className="nav-item">Movies</Link>
+            <Link to="/" className="nav-item">
+              Home
+            </Link>
+            <Link to="/movies" className="nav-item">
+              Movies
+            </Link>
           </Nav>
           <Form className="d-flex">
             <Form.Control
@@ -34,8 +50,11 @@ const Navigation = () => {
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              onChange={getSearch}
             />
-            <Button variant="outline-danger">Search</Button>
+            <Button variant="outline-danger" onClick={searchClick}>
+              Search
+            </Button>
           </Form>
         </Navbar.Collapse>
       </Container>
