@@ -20,7 +20,7 @@ const Movies = () => {
     const {data:results} = await axios.get(`${API_URL}/discover/movie`,{
       params:{
         api_key:process.env.REACT_APP_API_KEY,
-
+        
       }
     })
     setMovies(results)
