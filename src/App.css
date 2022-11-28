@@ -213,12 +213,12 @@ padding: 10px;
 }
 
 .active{
-border: 2px solid #000;
+  border: 2px solid white;
   font-weight: bold;
+  background-color: white;
 }
 
 .previous{
-  
   padding: 10px;
   border-radius: 6px;
   margin-right: 10px;

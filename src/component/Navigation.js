@@ -11,10 +11,11 @@ const Navigation = () => {
   const [search, setSearch] = useState("");
 
   const getSearch = (event) => {
+    event.preventDefault()
     setSearch(event.target.value);
   };
   const searchClick = () => {
-    if (search != {}) {
+    if (search != "") {
       dispatch(movieAction.getSearchMovie(search));
     } else {
       dispatch(movieAction.getMovies());

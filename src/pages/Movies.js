@@ -6,37 +6,22 @@ import { ClipLoader } from "react-spinners";
 import PopularMovies from "../component/PopularMovies";
 import { movieAction } from "../redux/actions/movieAction";
 import ReactPaginate from "react-paginate";
-import Pagination from "react-bootstrap/Pagination";
 import { useState } from "react";
-import axios from 'axios';
 
 const Movies = () => {
-  const { loading, popularMovies, searchMovie, moviesPerPage } = useSelector(
+  const { loading, searchMovie } = useSelector(
     (state) => state.movie
   );
-  const [movies, setMovies] = useState([])
-  const API_URL = "https://api.themoviedb.org/3"
-  const fetchMovies = async()=>{
-    const {data:results} = await axios.get(`${API_URL}/discover/movie`,{
-      params:{
-        api_key:process.env.REACT_APP_API_KEY,
-        
-      }
-    })
-    setMovies(results)
-  }
-  ///search/movie?api_key=${API_KEY}&language=en-US&query=${search}&page=1&include_adult=false
 
-  let [page, setPage] = useState([])
+  let [page, setPage] = useState([]);
   const dispatch = useDispatch();
   useEffect(() => {
-    fetchMovies()
-    dispatch(movieAction.getMovies());
+    dispatch(movieAction.getSearchMovie());
   }, []);
 
   const handlePageClick = (data) => {
-    setPage(data.selected +1)
-    dispatch(movieAction.getMoviesPerPage(page));
+    setPage(data.selected + 1);
+    dispatch(movieAction.getSearchMovie(page));
   };
 
   if (loading) {
@@ -50,18 +35,14 @@ const Movies = () => {
       />
     );
   }
+  
+
 
   return (
     <Container>
       <Row>
-        {popularMovies && <div>sorting filtering</div>}
-        {searchMovie=={} && popularMovies
-          ? popularMovies.results.map((item) => (
-              <Col md={4}>
-                <PopularMovies item={item} />
-              </Col>
-            ))
-          : searchMovie.results?.map((item) => (
+        {searchMovie && <div>sorting filtering</div>}
+        {searchMovie.results?.map((item) => (
               <Col md={4}>
                 <PopularMovies item={item} />
               </Col>
@@ -69,7 +50,7 @@ const Movies = () => {
       </Row>
 
       <div>
-        <div >
+        <div>
           <ReactPaginate
             previousLabel={"<"}
             nextLabel={">"}
