@@ -43,13 +43,15 @@ const PopularMovies = ({ item }) => {
                 </div>
               </div>
             </div>
-            <div className="mt-2">
-              {item.genre_ids.map((id) => (
-                <Badge bg="danger" className="badge-style">
-                  {movieGenre.find((item) => item.id == id).name}
-                </Badge>
-              ))}
-            </div>
+            {movieGenre.length ? (
+              <div className="mt-2">
+                {item.genre_ids.map((id) => (
+                  <Badge bg="danger" className="badge-style">
+                    {movieGenre.find((item) => item.id == id).name}
+                  </Badge>
+                ))}
+              </div>
+            ) : null}
             <div className="m-1 overflow">{item.overview}</div>
             <div className="sub-info">
               <div>

@@ -207,33 +207,18 @@ padding: 10px;
   background-color: black;
 }
 
-.disabled{
-  cursor: not-allowed;
+.page-link{
+  color: white;
+  background-color: black;
+  border: 1px solid red;
+  margin: 1em;
+  border-radius: 12px;
   
 }
-
-.active{
-  border: 2px solid white;
-  font-weight: bold;
-  background-color: white;
-}
-
-.previous{
-  padding: 10px;
-  border-radius: 6px;
-  margin-right: 10px;
-  cursor: pointer;
-  list-style: none;
-}
-
-.next{
-  padding: 10px;
-  border-radius: 6px;
-  margin-right: 10px;
-  cursor: pointer;
-  list-style: none;
-}
-div > ul {
-  display: inline-flex;
-
+.flex{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 1em;
+  top: 7em;
 }

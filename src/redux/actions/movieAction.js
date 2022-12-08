@@ -1,10 +1,13 @@
+import { useState } from "react";
 import api from "../api";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
+
 function getMovieDetail({ id }) {
   return async (dispatch) => {
     try {
       dispatch({ type: "GET_MOVIE_DETAIL_REQUEST", payload: { id } });
+
       const movieTrailerApi = api.get(
         `movie/${id}/videos?api_key=${API_KEY}&language=en-US`
       );
@@ -81,26 +84,26 @@ function getMovies() {
     }
   };
 }
-function getSearchMovie(search,page) {
+function getSearchMovie({ search, page }) {
   return async (dispatch) => {
     try {
-      const type = search  ? "search" : "";
-      const popular = search ? "" : "popular";
-      const pageNum = page ? "page" : 1;
+      const type = search ? "search" : "discover";
+      // const sortBy = 
+      const pageNum = page ? `${page}` : "1";
       dispatch({ type: "GET_SEARCH_REQUEST" });
       //axios 사용하여 API Call 사용
+      // https://api.themoviedb.org/3/discover/movie?api_key=<<api_key>>&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate
+
       const searchMovieApi = api.get(
-        `${type}/movie/${popular}?api_key=${API_KEY}&language=en-US&page=${pageNum}`,{
-          params:{
-            api_key:process.env.REACT_APP_API_KEY,
+        `${type}/movie?api_key=${API_KEY}&language=en-US&page=${pageNum}`,
+        {
+          params: {
+            api_key: process.env.REACT_APP_API_KEY,
             query: search,
-          }
+            page: page,
+          },
         }
       );
-      // const popularMovieApi = api.get(
-      //   `movie/popular?api_key=${API_KEY}&language=en-US&page=1`
-      // );
-      //if multiple api is required at the same time.
       let [searchMovie] = await Promise.all([searchMovieApi]);
 
       dispatch({
@@ -120,5 +123,4 @@ export const movieAction = {
   getMovies,
   getMovieDetail,
   getSearchMovie,
-
 };

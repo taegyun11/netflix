@@ -48,6 +48,7 @@ const MovieDetail = () => {
 
   return (
     <div>
+      {Object.keys(movieDetail).length? <div>
       <div className="movie-detail-page">
         <div className="movie-picture">
           <img
@@ -57,42 +58,42 @@ const MovieDetail = () => {
         </div>
         <div className="movie-detail-description">
           <div>
-            {movieDetail.genres.map((genre) => (
-              <Badge bg="danger" className="Badge-style" key={genre.id}>
-                {genre.name}
+            {movieDetail.genres?.map((genre) => (
+              <Badge bg="danger" className="Badge-style" key={genre?.id}>
+                {genre?.name}
               </Badge>
             ))}
           </div>
           <div className="movie-detail-overview">
-            <div className="movieDetail_title">{movieDetail.title}</div>
+            <div className="movieDetail_title">{movieDetail?.title}</div>
             <hr className="hr_description" />
             <h1>Overview</h1>
-            <div className="moviedetail-overview">{movieDetail.overview}</div>
+            <div className="moviedetail-overview">{movieDetail?.overview}</div>
             <hr className="hr_description" />
             <br />
             <div>
               <Badge bg="danger" className="budget-badge">
                 Budget
               </Badge>
-              : {movieDetail.budget}
+              : {movieDetail?.budget}
             </div>
             <div>
               <Badge bg="danger" className="budget-badge">
                 Popularity
               </Badge>
-              : {movieDetail.popularity}
+              : {movieDetail?.popularity}
             </div>
             <div>
               <Badge bg="danger" className="budget-badge">
                 Release Date
               </Badge>
-              : {movieDetail.release_date}
+              : {movieDetail?.release_date}
             </div>
             <div>
               <Badge bg="danger" className="budget-badge">
                 Revenue
               </Badge>
-              : ${movieDetail.revenue}
+              : ${movieDetail?.revenue}
             </div>
             <div>
               {/* Movie Trailer Button */}
@@ -102,7 +103,7 @@ const MovieDetail = () => {
               {/* Modal for Trailer */}
               <Modal show={show} onHide={handleClose} size="lg" centered>
                 <Modal.Body className="movie-trailer-body">
-                  <YouTube videoId={movieTrailer.results[0].key} opts={opts} />
+                  <YouTube videoId={movieTrailer?.results[0].key} opts={opts} />
                 </Modal.Body>
                 <Modal.Footer>
                   <Button variant="secondary" onClick={handleClose}>
@@ -126,11 +127,11 @@ const MovieDetail = () => {
           >
             Related
           </Badge>
-          {movieReview.results.map((item) => (
+          {movieReview?.results.map((item) => (
             <div>
-              <h2 className="review-author">{item.author}</h2>
+              <h2 className="review-author">{item?.author}</h2>
               <br />
-              <h5>{item.content}</h5>
+              <h5>{item?.content}</h5>
               <hr className="hr_description" />
             </div>
           ))}
@@ -150,10 +151,10 @@ const MovieDetail = () => {
           <Container>
             <Row>
               <Col>
-                {relatedMovie.results.map((item) => (
+                {relatedMovie?.results.map((item) => (
                   <span className="related-movie">
                     <img
-                      src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${item.poster_path}`}
+                      src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${item?.poster_path}`}
                     />
                   </span>
                 ))}
@@ -162,6 +163,7 @@ const MovieDetail = () => {
           </Container>
         </div>
       )}
+      </div>:null}
     </div>
   );
 };
