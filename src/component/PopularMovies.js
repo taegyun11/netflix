@@ -18,6 +18,7 @@ const PopularMovies = ({ item }) => {
   }
   return (
     <div className="movies">
+      
       <div
         className="movies-poster"
         style={{
@@ -25,14 +26,16 @@ const PopularMovies = ({ item }) => {
             "url(" +
             `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${item.poster_path}` +
             ")",
-        }}
-      >
+        }
+      }
+      ><span role="image" aria-label="No IMAGE"></span>
         <div className="gradient">
           <div className="movies-info">
             <div className="movies-summary">
               <img
                 className="movies-picture"
                 width={50}
+                alt="No image"
                 src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${item.poster_path}`}
               />
               <div className="movies-summary-title">

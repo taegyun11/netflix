@@ -222,3 +222,52 @@ padding: 10px;
   left: 1em;
   top: 7em;
 }
+.page-item.active .page-link{
+  color: black;
+  background-color: white;
+  border-color: red;
+}
+.main-accordion{
+  width: 15em;
+
+  background: black;
+}
+.accordion-item{
+  background-color: black;
+  border: 1px solid white;
+  color: white;
+}
+.accordion-style{
+  background-color: black;
+
+}
+.accordion-item:first-of-type .accordion-button{
+  background-color: #0a0909;
+  color: white;
+  border: 1px solid white;
+}
+.sort-box{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.btn-primary{
+  margin-top: 2em;
+  background-color: black;
+  border-radius: 0;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid red;
+}
+.btn-primary:hover{
+  background-color: black;
+  border: 1px solid white;
+  border-top: white;
+  border-left: white;
+  border-right: white;
+
+}
+.btn-check:active+.btn-primary, .btn-check:checked+.btn-primary, .btn-primary.active, .btn-primary:active, .show>.btn-primary.dropdown-toggle{
+  background-color: #8c8b8b;
+}

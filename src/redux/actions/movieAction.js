@@ -84,18 +84,15 @@ function getMovies() {
     }
   };
 }
-function getSearchMovie({ search, page }) {
+function getSearchMovie({ search, page,filter }) {
   return async (dispatch) => {
     try {
       const type = search ? "search" : "discover";
-      // const sortBy = 
+      const sortBy = filter ? "popularity.desc" : "popularity.asc"
       const pageNum = page ? `${page}` : "1";
       dispatch({ type: "GET_SEARCH_REQUEST" });
-      //axios 사용하여 API Call 사용
-      // https://api.themoviedb.org/3/discover/movie?api_key=<<api_key>>&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate
-
       const searchMovieApi = api.get(
-        `${type}/movie?api_key=${API_KEY}&language=en-US&page=${pageNum}`,
+        `${type}/movie?api_key=${API_KEY}&language=en-US&sort_by=${sortBy}&page=${pageNum}`,
         {
           params: {
             api_key: process.env.REACT_APP_API_KEY,

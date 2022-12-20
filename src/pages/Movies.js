@@ -10,6 +10,7 @@ import { useState } from "react";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import Accordion from "react-bootstrap/Accordion";
 
 const Movies = () => {
   const { loading, searchMovie } = useSelector((state) => state.movie);
@@ -17,16 +18,23 @@ const Movies = () => {
   const dispatch = useDispatch();
 
   const [page, setPage] = useState(1);
+  const [filter, setFilter] = useState(true);
   useEffect(() => {
-    dispatch(movieAction.getSearchMovie({ page }));
-  }, []);
+    dispatch(movieAction.getSearchMovie({ page, filter }));
+  }, [page]);
 
-  const handlePageClick = (data) => {
+  const handlePageClick = (data, filter) => {
     setPage(data.selected + 1);
-    dispatch(movieAction.getSearchMovie({ page }));
+    dispatch(movieAction.getSearchMovie({ filter, page }));
   };
-  const onSortClick = (col) => {};
-
+  const onDescSortClick = () => {
+    setFilter(true);
+    dispatch(movieAction.getSearchMovie({ filter, page }));
+  };
+  const onAscSortClick = () => {
+    setFilter(false);
+    dispatch(movieAction.getSearchMovie({ filter, page }));
+  };
 
   if (loading) {
     return (
@@ -39,32 +47,49 @@ const Movies = () => {
       />
     );
   }
+  // <DropdownButton id="dropdown-basic-button" title="Sort By" variant="dark">
+  //   <Dropdown.Item href="#" onClick={onDescSortClick}>
+  //     Popularity(descending)
+  //   </Dropdown.Item>
+  //   <Dropdown.Item href="#" onClick={onAscSortClick}>
+  //     Popularity(ascending)
+  //   </Dropdown.Item>
+  // </DropdownButton>;
 
   return (
     <Container>
       <Row>
         <div className="flex">
-          <div>
-            <DropdownButton
-              id="dropdown-basic-button"
-              title="Sort By"
-              variant="dark"
+          <div className="main-accordion">
+            <Accordion
+              defaultActiveKey={["0"]}
+              alwaysOpen
+              className="accordion-style"
             >
-              <Dropdown.Item href="#" onClick={() => onSortClick("popularity")}>
-                Popularity(descending)
-              </Dropdown.Item>
-              <Dropdown.Item href="#">Popularity(ascending)</Dropdown.Item>
-            </DropdownButton>
+              <Accordion.Item eventKey="0">
+                <Accordion.Header>Sort</Accordion.Header>
+                <Accordion.Body>
+                  <div className="sort-box">
+                    <h6>Sort</h6>
+                    <Accordion>
+                      <Accordion.Item>
+                        <Accordion.Header>Sort Desc</Accordion.Header>
+                      </Accordion.Item>
+                    </Accordion>
+                  </div>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
           </div>
-          filtering
         </div>
-        {/* Object.keys(movieDetail).length? */}
-        {Object.keys(searchMovie).length? 
-        searchMovie.results?.map((item) => (
-          <Col md={4}>
-            <PopularMovies item={item} />
-          </Col>
-        )):null}
+
+        {Object.keys(searchMovie).length
+          ? searchMovie.results?.map((item) => (
+              <Col md={3}>
+                <PopularMovies item={item} />
+              </Col>
+            ))
+          : null}
       </Row>
 
       <div>
@@ -80,7 +105,7 @@ const Movies = () => {
             previousLabel={""}
             nextLabel={""}
             activeClassName={"active"}
-            forcePage={page-1}
+            forcePage={page - 1}
           />
         </div>
       </div>
