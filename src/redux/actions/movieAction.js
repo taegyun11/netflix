@@ -84,15 +84,18 @@ function getMovies() {
     }
   };
 }
-function getSearchMovie({ search, page,filter }) {
+function getSearchMovie({ search, page,filter,minValue, maxValue }) {
   return async (dispatch) => {
     try {
       const type = search ? "search" : "discover";
       const sortBy = filter ? "popularity.desc" : "popularity.asc"
       const pageNum = page ? `${page}` : "1";
+      const minimumValue = minValue ? `${minValue}` : "1960"
+      const maximumValue = maxValue ? `${maxValue}` : "2023"
+
       dispatch({ type: "GET_SEARCH_REQUEST" });
       const searchMovieApi = api.get(
-        `${type}/movie?api_key=${API_KEY}&language=en-US&sort_by=${sortBy}&page=${pageNum}`,
+        `${type}/movie?api_key=${API_KEY}&release_date.gte=${minimumValue}&release_date.lte=${maximumValue}&language=en-US&sort_by=${sortBy}&page=${pageNum}`,
         {
           params: {
             api_key: process.env.REACT_APP_API_KEY,

@@ -7,10 +7,8 @@ import PopularMovies from "../component/PopularMovies";
 import { movieAction } from "../redux/actions/movieAction";
 import ReactPaginate from "react-paginate";
 import { useState } from "react";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
 import Accordion from "react-bootstrap/Accordion";
+import MultiRangeSlider from "multi-range-slider-react";
 
 const Movies = () => {
   const { loading, searchMovie } = useSelector((state) => state.movie);
@@ -19,9 +17,17 @@ const Movies = () => {
 
   const [page, setPage] = useState(1);
   const [filter, setFilter] = useState(true);
+  const [minValue, set_minValue] = useState(1960);
+  const [maxValue, set_maxValue] = useState(2023);
+
+  const handleInput = (e) => {
+    set_minValue(e.minValue);
+    set_maxValue(e.maxValue);
+  };
+
   useEffect(() => {
-    dispatch(movieAction.getSearchMovie({ page, filter }));
-  }, [page]);
+    dispatch(movieAction.getSearchMovie({ page, filter, minValue, maxValue}));
+  }, [page,minValue,maxValue]);
 
   const handlePageClick = (data, filter) => {
     setPage(data.selected + 1);
@@ -67,16 +73,49 @@ const Movies = () => {
               className="accordion-style"
             >
               <Accordion.Item eventKey="0">
-                <Accordion.Header>Sort</Accordion.Header>
+                <Accordion.Header>Sort By</Accordion.Header>
                 <Accordion.Body>
                   <div className="sort-box">
-                    <h6>Sort</h6>
-                    <Accordion>
+                    <Accordion defaultActiveKey={["1"]}>
                       <Accordion.Item>
-                        <Accordion.Header>Sort Desc</Accordion.Header>
+                        <Accordion.Header>Popularity Desc</Accordion.Header>
+                        <Accordion.Body>
+                          <a className="sort_button" onClick={onDescSortClick}>
+                            Popularity Desc
+                          </a>
+                        </Accordion.Body>
+                        <Accordion.Body>
+                          <a className="sort_button" onClick={onAscSortClick}>
+                            Popularity Asc
+                          </a>
+                        </Accordion.Body>
                       </Accordion.Item>
                     </Accordion>
                   </div>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+          </div>
+          <div className="main-accordion">
+            <Accordion
+              defaultActiveKey={["0"]}
+              alwaysOpen
+              className="accordion-style"
+            >
+              <Accordion.Item eventKey="0">
+                <Accordion.Header>Filter</Accordion.Header>
+                <Accordion.Body>
+                  <MultiRangeSlider
+                    min={1960}
+                    max={2023}
+                    step={5}
+                    minValue={minValue}
+                    maxValue={maxValue}
+                    ruler={false}
+                    onChange={(e) => {
+                      handleInput(e);
+                    }}
+                  />
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>

@@ -21,7 +21,7 @@ const MovieCard = ({ item }) => {
       }}
     >
       <div className="overLay">
-        <h2>{item.title}</h2>
+        <h2 className="overflow_card">{item.title}</h2>
         <div className="ml-1">
           {item.genre_ids.map((id) => (
             <Badge className="badge-style1" bg="danger">

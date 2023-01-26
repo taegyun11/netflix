@@ -26,7 +26,18 @@ const responsive = {
 const MovieSlide = ({ movies }) => {
   return (
     <div>
-      <Carousel responsive={responsive}>
+      <Carousel
+        responsive={responsive}
+        // autoPlay
+        pauseOnHover
+        infinite
+        autoPlaySpeed={4000}
+        centerMode={false}
+        slidesToSlide={2}
+        containerClass="carousel-container"
+        sliderClass="carousel-slider"
+
+      >
         {movies.results.map((item) => (
           <MovieCard item={item} />
         ))}
